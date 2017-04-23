@@ -1,0 +1,24 @@
+{
+  "name": "mmm-dailyquote",
+  "version": "1.0.2",
+  "description": "News with pictures and brief descriptions for MM2",
+  "main": "MMM-DailyQuote.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/cowboysdudes/MMM-DailyQuote.git"
+  },
+  "author": "Cowboysdude",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/cowboysdudes/MMM-DailyQuote/issues"
+  },
+  "homepage": "https://github.com/cowboysdudes/MMM-DailyQuote#readme",
+  "dependencies": {
+    "fs": "0.0.1-security",
+    "request": "^2.81.0"
+  },
+  "devDependencies": {}
+}
