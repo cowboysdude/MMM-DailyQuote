@@ -38,7 +38,6 @@ module.exports = NodeHelper.create({
                 this.sendSocketNotification('QUOTE_RESULT', result);
                 this.quote.timestamp = this.getDate();
                 this.quote.data = result;
-        console.log("This recipe: "+this.quote.data);
                 this.fileWrite();
             }
         });
