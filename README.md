@@ -2,29 +2,19 @@
 Random daily quote for MagicMirror2
 
   
-Examples
+# Installation
   
  MagicMirror/modules
  
-  
+ Clone this repo into your ~MagicMirror/modules directory.
  git clone https://github.com/cowboysdude/MMM-DailyQuote
- 
-  
- # Installation
-  
-     cd
-    ~MagicMirror/modules/MMM-DailyQuote
-    run - npm install
-    Clone this repo into your ~MagicMirror/modules directory.
-  
- #config.js
- `git clone https://github.com/cowboysdude/MMM-DailyQuote.git`
  
  Then `cd MMM-DailyQuote`
  
  run - `npm install` in your `~MagicMirror/modules/MMM-DailyQuote` directory.
  
- # Add to Config.js
+ 
+ #config.js
   
         { 
             disabled: false,
