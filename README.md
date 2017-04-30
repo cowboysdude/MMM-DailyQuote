@@ -22,12 +22,16 @@ Random daily quote for MagicMirror2
             position: 'bottom_bar', 
             config: { 
                  maxWidth: "100%", 
-                 header: "Quote of the Day", 
+                 header: "Quote of the Day",
+                 lang: "EN"
                  } 
         },
           
+         config. params that MUST be included:
+         lang: MUST BE SET TO EITHER EN OR DE.  Must be in caps. 
+         
          config options...
     maxWidth:` can be set to either px or %
     header: If you don't want to use a header simply leave it out :)
-  
+     
   Restart mirror... enjoy...  
