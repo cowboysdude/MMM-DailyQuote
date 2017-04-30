@@ -19,41 +19,31 @@ module.exports = NodeHelper.create({
         };
     },
 
-    getQuote: function(url) {
-        request({
-            url: "http://quotesondesign.com/wp-json/posts?filter[orderby]=rand&filter[posts_per_page]=1",
-            method: 'GET'
-        }, (error, response, body) => {
-            if (!error && response.statusCode == 200) {
-                var result = JSON.parse(body);
-                this.sendSocketNotification('QUOTE_RESULT', result);
-            }
-        });
-    },
-    
-     getGQuote: function(url) {
-    	request({ 
-    	          url:"http://www.zitate-online.de/zitatdestages.xml",
-    	          method: 'GET',
-    	          encoding: null
-    	        }, (error, response, body) => {
-            if (!error && response.statusCode === 200) {
-            var utf8String = iconv.decode(new Buffer(body), "ISO-8859-1");	
-                parser(utf8String, { tagNameProcessors: [stripNS] },  (err, result)=> {
-                        var result = JSON.parse(JSON.stringify(result.RDF.item));
-                        this.sendSocketNotification('QUOTE_RESULT', result);
-                });
-            }
-       });
-    },
-    
-
     //Subclass socketNotificationReceived received.
     socketNotificationReceived: function(notification, payload) {
-        if (notification === 'GET_QUOTE') {
-                this.getQuote(payload);
-            } else if (notification === 'GET_GQUOTE'){
-                this.getGQuote(payload);
+         if (notification === 'CONFIG') {
+            this.config = payload;
+         if (fs.existsSync(`modules/${this.name}/apis/${this.config.provider}.js`)) {
+                this.provider = require(`./apis/${this.config.provider}`)(this.config);
+                this.getData();
+                setInterval(() => {
+                    this.getData();
+                }, this.config.updateInterval);
+            } else {
+                console.log(`${this.name}: Couldn`t load provider ${this.config.provider}`);
             }
         }
+    },
+        },
+        
+      getData() {
+        this.provider.getData((err, data) => {
+            if (err) {
+                console.log(err);
+            } else {
+                this.sendSocketNotification('QUOTE', data);
+            }
+        });
+    }
+});     
 });
