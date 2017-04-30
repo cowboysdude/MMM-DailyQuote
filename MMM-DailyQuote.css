@@ -1,12 +1,30 @@
 
-MMM-DailyQuote .header {
+@import url('https://fonts.googleapis.com/css?family=Raleway|Ranga:400,700');
+
+.MMM-DailyQuote .header {
 	text-align: center;
 	font-size: 20px;
 }
-MMM-DailyQuote .content {
-  width: 100%;
-  background-position: 11px 0;
+.MMM-DailyQuote .font {
+  font-family: 'Raleway', sans-serif;
+  font-size: 24px;
 }
-h3:first-letter {
-    text-transform:capitalize;
+
+.MMM-DailyQuote .warning {
+	color: #ff0000;
+	font-size: 20px;
+    -webkit-animation: pulsate 3s ease-out;
+    -webkit-animation-iteration-count: infinite; 
+    opacity: 0.5;
+}
+@-webkit-keyframes pulsate {
+    0% { 
+        opacity: 0.5;
+    }
+    50% { 
+        opacity: 1.0;
+    }
+    100% { 
+        opacity: 0.5;
+    }
 }
