@@ -1,4 +1,4 @@
- /* Magic Mirror
+  /* Magic Mirror
     * Module: MMM-DailyQuote
     *
     * By cowboysdude
@@ -15,6 +15,7 @@ Module.register("MMM-DailyQuote", {
            retryDelay: 2500,
            header: "",
            maxWidth: "100%",
+           lang: ""
        },
 
        // Define required scripts.
@@ -42,14 +43,21 @@ Module.register("MMM-DailyQuote", {
          var quote = this.quote;
 
          var wrapper = document.createElement("div");
-         wrapper.className = "wrapper";
          wrapper.style.maxWidth = this.config.maxWidth;
-         
 
          if (!this.loaded) {
-             wrapper.innerHTML = "Finding Quote....";
-             wrapper.className = "bright light small";
-             return wrapper;
+         	if (this.config.lang === "EN"){
+         	wrapper.classList.add("bright", "light", "small");
+			wrapper.innerHTML = "Finding Quote....";	
+			} else if (this.config.lang === "DE")  {
+			wrapper.classList.add("bright", "light", "small");	
+			wrapper.innerHTML = "Finding Zitat....";	
+			} else {
+			wrapper.classList.add("warning");
+			wrapper.innerHTML = "DailyQuote Error: <br> Please set language in Config.js <br><b> - SEE README -";	
+			}
+            
+            return wrapper;
          }
          if (this.config.header != "" ){
          var header = document.createElement("header");
@@ -60,8 +68,9 @@ Module.register("MMM-DailyQuote", {
 		 
          var top = document.createElement("div");
 
-         var mainquote = document.createElement("h3");
-         mainquote.classList.add("small", "bright", "content");
+        if (this.config.lang === "EN"){
+         var mainquote = document.createElement("p");
+         mainquote.classList.add("small", "bright", "font");
          mainquote.innerHTML = quote[0].content;
          top.appendChild(mainquote);
 
@@ -69,7 +78,19 @@ Module.register("MMM-DailyQuote", {
          author.classList.add("xsmall", "bright");
          author.innerHTML = "~ "+quote[0].title;
          top.appendChild(author);
-
+         } else if (this.config.lang === "DE") {
+         	
+         var mainquote = document.createElement("p");
+         mainquote.classList.add("small", "bright", "font");
+         mainquote.innerHTML = quote[1].title;
+         top.appendChild(mainquote);
+         
+         var mainAuthor = document.createElement("p");
+         mainAuthor.classList.add("xsmall", "bright");
+         mainAuthor.innerHTML = "~ "+quote[1].creator;
+         top.appendChild(mainAuthor);
+         }
+         
          wrapper.appendChild(top);
          return wrapper;
 
@@ -78,6 +99,7 @@ Module.register("MMM-DailyQuote", {
      processQuote: function(data) {
          this.today = data.Today;
          this.quote = data;
+console.log(this.quote);
          this.loaded = true;
      },
 
@@ -89,9 +111,14 @@ Module.register("MMM-DailyQuote", {
          this.getQuote(this.config.initialLoadDelay);
      },
 
-
      getQuote: function() {
-         this.sendSocketNotification('GET_QUOTE');
+    if (this.config.lang === "EN") {
+            this.sendSocketNotification('GET_QUOTE');
+         } else if (this.config.lang === "DE") {
+             this.sendSocketNotification('GET_GQUOTE');
+         } else  {
+             console.log("Please select either EN or DE in config.js")
+         } 
      },
 
      socketNotificationReceived: function(notification, payload) {
