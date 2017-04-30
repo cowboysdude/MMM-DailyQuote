@@ -7,6 +7,9 @@
 const NodeHelper = require('node_helper');
 const request = require('request');
 const fs = require('fs');
+const parser = require('xml2js').parseString;
+var stripNS = require('xml2js').processors.stripPrefix;
+var iconv = require('iconv-lite');
 
 module.exports = NodeHelper.create({
 
@@ -15,16 +18,6 @@ module.exports = NodeHelper.create({
             timestamp: null,
             data: null
         };
-        this.path = "modules/MMM-DailyQuote/quote.json";
-        if (fs.existsSync(this.path)) {
-            var temp = JSON.parse(fs.readFileSync(this.path, 'utf8'));
-            if (temp.timestamp === this.getDate()) {
-                this.quote = temp;
-                
-            }
-            
-        }
-
     },
 
     getQuote: function(url) {
@@ -34,37 +27,34 @@ module.exports = NodeHelper.create({
         }, (error, response, body) => {
             if (!error && response.statusCode == 200) {
                 var result = JSON.parse(body);
-        console.log(result);
                 this.sendSocketNotification('QUOTE_RESULT', result);
-                this.quote.timestamp = this.getDate();
-                this.quote.data = result;
-                this.fileWrite();
             }
         });
     },
-
-    fileWrite: function() {
-        fs.writeFile(this.path, JSON.stringify(this.quote), function(err) {
-            if (err) {
-                return console.log(err);
+    
+     getGQuote: function(url) {
+    	request({ 
+    	          url:"http://www.zitate-online.de/zitatdestages.xml",
+    	          method: 'GET',
+    	          encoding: null
+    	        }, (error, response, body) => {
+            if (!error && response.statusCode === 200) {
+            var utf8String = iconv.decode(new Buffer(body), "ISO-8859-1");	
+                parser(utf8String, { tagNameProcessors: [stripNS] },  (err, result)=> {
+                        var result = JSON.parse(JSON.stringify(result.RDF.item));
+                        this.sendSocketNotification('QUOTE_RESULT', result);
+                });
             }
-            console.log("The Quote was saved!");
-        });
+       });
     },
-
-    getDate: function() {
-        return (new Date()).toLocaleDateString();
-    },
+    
 
     //Subclass socketNotificationReceived received.
     socketNotificationReceived: function(notification, payload) {
         if (notification === 'GET_QUOTE') {
-            if (this.quote.timestamp === this.getDate() && this.quote.data !== null) {
-                this.sendSocketNotification('QUOTE_RESULT', this.quote.data);
-            } else {
                 this.getQuote(payload);
+            } else if (notification === 'GET_GQUOTE'){
+                this.getGQuote(payload);
             }
         }
-    }
-
 });
