@@ -6,7 +6,6 @@
     */
 const NodeHelper = require('node_helper');
 const request = require('request');
-const fs = require('fs');
 const parser = require('xml2js').parseString;
 var stripNS = require('xml2js').processors.stripPrefix;
 var iconv = require('iconv-lite');
