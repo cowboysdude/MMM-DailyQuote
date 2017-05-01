@@ -18,13 +18,12 @@ run - `npm install` in your `~MagicMirror/modules/MMM-DailyQuote` directory.
 
 ```
 { 
-    disabled: false,
     module: 'MMM-DailyQuote', 
     position: 'bottom_bar', 
     config: { 
          maxWidth: "100%", 
          header: "Quote of the Day",
-         lang: "EN"
+         lang: "EN" -- OR "DE" for German.  Fallback is EN
          } 
 },
 ```
