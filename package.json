@@ -1,11 +1,8 @@
 {
   "name": "mmm-dailyquote",
   "version": "1.0.3",
-  "description": "News with pictures and brief descriptions for MM2",
+  "description": "Random daily quote for MagicMirror2",
   "main": "MMM-DailyQuote.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/cowboysdudes/MMM-DailyQuote.git"
@@ -20,6 +17,5 @@
     "iconv-lite": "^0.4.16",
     "request": "^2.81.0",
     "xml2js": "^0.4.17"
-  },
-  "devDependencies": {}
+  }
 }
