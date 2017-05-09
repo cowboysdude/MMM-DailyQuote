@@ -1,7 +1,7 @@
 /* Magic Mirror
  * Module: MMM-DailyQuote
  *
- * By strawberry 3.141
+ * By fewieden
  *
  */
 const NodeHelper = require("node_helper");
