@@ -1,7 +1,7 @@
 # MMM-DailyQuote
 
-Random daily quote for MagicMirror2
-  
+Random daily quote for MagicMirror2 by fewieden
+ 
 # Installation
   
 MagicMirror/modules
