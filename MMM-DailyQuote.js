@@ -11,7 +11,7 @@ Module.register("MMM-DailyQuote", {
 
 	// Module config defaults.
 	defaults: {
-		updateInterval: 12 * 60 * 60 * 1000, // every 12 hours
+		updateInterval: 24*60*60*1000, // every 12 hours
 		animationSpeed: 1000,
 		initialLoadDelay: 1130, // 0 seconds delay
 		retryDelay: 2500,
