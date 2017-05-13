@@ -9,15 +9,15 @@ const request = require("request");
 
 module.exports = () => {
 
-	const baseUrl = "http://quotesondesign.com/wp-json/posts";
+	const baseUrl = "http://quotes.rest";
 
 	const requestQuote = () => new Promise((resolve, reject) => {
 		request({
-			url: `${baseUrl}?filter[orderby]=rand&filter[posts_per_page]=1`,
+			url: `${baseUrl}/qod.json`,
 			method: "GET"
 		}, (error, response, body) => {
 			if (!error && response.statusCode == 200) {
-				var result = JSON.parse(body);
+				var result = JSON.parse(body).contents.quotes;
 				resolve(result[0]);
 			} else {
 				reject("Cannot load quote!");
@@ -27,8 +27,8 @@ module.exports = () => {
 
 	const normalizeQuote = (quote) => {
 		return {
-			author: quote.title,
-			content: quote.content
+			author: quote.author,
+			content: quote.quote
 		};
 	};
 
