@@ -15,7 +15,6 @@
   "homepage": "https://github.com/cowboysdudes/MMM-DailyQuote#readme",
   "dependencies": {
     "iconv-lite": "^0.4.16",
-    "request": "^2.81.0",
     "xml2js": "^0.4.17"
   }
 }
