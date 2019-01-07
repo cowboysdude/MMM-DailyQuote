@@ -14,9 +14,7 @@ Module.register("MMM-DailyQuote", {
 		updateInterval: 12*60*60*1000, // every 12 hours
 		animationSpeed: 1000,
 		initialLoadDelay: 1130, // 0 seconds delay
-		retryDelay: 2500,
-		header: "",
-		maxWidth: "100%"
+		retryDelay: 2500 
 	},
 
 	getStyles: function () {
@@ -35,6 +33,7 @@ Module.register("MMM-DailyQuote", {
 		Log.info("Starting this really cool module: " + this.name);
 
 		// Set config.language as language if it is not defined explicitly in module config
+		this.scheduleUpdate();
 		this.config.lang = this.config.lang || config.language;
 		this.sendSocketNotification("CONFIG", this.config);
 	},
@@ -42,8 +41,7 @@ Module.register("MMM-DailyQuote", {
 	getDom: function () {
 		var quote = this.quote;
 
-		var wrapper = document.createElement("div");
-		wrapper.style.maxWidth = this.config.maxWidth;
+		var wrapper = document.createElement("div"); 
 
 		if (!this.loaded) {
 			wrapper.classList.add("bright", "light", "small");
@@ -73,10 +71,22 @@ Module.register("MMM-DailyQuote", {
 
 		return wrapper;
 	},
+	
+	scheduleUpdate: function() {
+		setInterval(() => {
+			this.getQuote();
+		}, this.config.updateInterval);
+		this.getQuote(this.config.initialLoadDelay);
+	},
+
+	getQuote: function() {
+		this.sendSocketNotification('GET_QUOTE');
+	},
 
 	processQuote: function (data) {
 		this.quote = data;
 		this.loaded = true;
+		console.log(this.quote);
 	},
 
 	socketNotificationReceived: function (notification, payload) {

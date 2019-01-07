@@ -1,20 +1,15 @@
 {
   "name": "mmm-dailyquote",
-  "version": "1.0.3",
-  "description": "Random daily quote for MagicMirror2",
+  "version": "2.0.0",
+  "description": "DailyQuote Module",
   "main": "MMM-DailyQuote.js",
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/cowboysdudes/MMM-DailyQuote.git"
-  },
-  "author": "Cowboysdude",
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/cowboysdudes/MMM-DailyQuote/issues"
-  },
-  "homepage": "https://github.com/cowboysdudes/MMM-DailyQuote#readme",
   "dependencies": {
-    "iconv-lite": "^0.4.16",
-    "xml2js": "^0.4.17"
-  }
+    "google-translate-api": "^2.3.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "cowboysdude",
+  "license": "MIT"
 }
