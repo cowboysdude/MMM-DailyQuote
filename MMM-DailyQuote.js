@@ -19,15 +19,7 @@ Module.register("MMM-DailyQuote", {
 
 	getStyles: function () {
 		return ["MMM-DailyQuote.css"];
-	},
-
-	getTranslations: function () {
-		return {
-			de: "translations/de.json",
-			en: "translations/en.json"
-		};
-	},
-
+	}, 
 	// Define start sequence.
 	start: function () {
 		Log.info("Starting this really cool module: " + this.name);
