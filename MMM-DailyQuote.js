@@ -43,17 +43,6 @@ Module.register("MMM-DailyQuote", {
 
 		var wrapper = document.createElement("div"); 
 
-		if (!this.loaded) {
-			wrapper.classList.add("bright", "light", "small");
-			wrapper.innerHTML = this.translate("LOADING");
-		} else {
-			if (this.config.header != "") {
-				var header = document.createElement("header");
-				header.className = "header";
-				header.innerHTML = this.config.header;
-				wrapper.appendChild(header);
-			}
-
 			var top = document.createElement("div");
 
 			var mainquote = document.createElement("p");
