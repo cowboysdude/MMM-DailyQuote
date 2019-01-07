@@ -37,6 +37,4 @@ config options...
  
  SO putting in a config section in the module and adding 'language: "en"' won't work ;)  So before anyone tells you to try it. 
   
-There are however only 2 translation files for this en and de....if you'd like to contribute please let me know.  
-  
 Restart mirror... enjoy...  
