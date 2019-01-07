@@ -17,21 +17,19 @@ run - `npm install` in your `~MagicMirror/modules/MMM-DailyQuote` directory.
 #config.js
 
 ```
-{ 
+	   { 
+		  disabled: f,
     module: 'MMM-DailyQuote', 
-    position: 'bottom_bar', 
-    config: { 
-         maxWidth: "100%", 
-         header: "Quote of the Day",
-         lang: "EN" -- OR "DE" for German.  Fallback is EN
-         } 
-},
+    position: 'bottom_bar' 
+    }
 ```
          
 config options...
-maxWidth: can be set to either px or %
-header: If you don't want to use a header simply leave it out :)
-lang: you can set the language explicitly, by default it uses your global config language.
-If a language is not supported it will fallback to english.
+ None :) 
+ 
+ Used to only support English and German now supports all languages :)  It reads your language from your config.js file ie language: 'nl'
+ It's automatic with no support for override at the moment.
+ 
+ SO putting in a config section in the module and adding 'language: "en"' won't work ;)  So before anyone tells you to try it. 
      
 Restart mirror... enjoy...  
